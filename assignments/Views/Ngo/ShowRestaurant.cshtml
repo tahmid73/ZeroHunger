@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "ShowRestaurant";
+}
+
+<h2>ShowRestaurant</h2>
+
+<h3>
+    <a href="#" class="btn btn-info">Restaurents</a> <a href="#" class="btn btn-info">Show Food</a>
+    <a href="#" class="btn btn-info">Requests</a> <a href="#" class="btn btn-info">Show Employee</a>
+
+</h3>
+<h2>Show Restaurents</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Address</th>
+    </tr>
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>@r.r_name</td>
+            <td>@r.r_id</td>
+            <td>@r.r_address</td>
+            <td><a href="/Ngo/Request/@r.r_id" class="btn btn-info">New Request</a></td>
+        </tr>
+    }
+</table>

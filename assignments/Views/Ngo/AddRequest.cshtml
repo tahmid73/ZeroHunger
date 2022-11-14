@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "AddRequest";
+}   
+
+<h2>AddRequest</h2>
+
+
+<form action="" method="post">
+    <input type="text" class="form-control" name="r_id" placeholder="Restaurant Id" readonly/>
+    <input type="time" min="0" class="form-control" name="preserve_time" placeholder="Preserveable time" /><br />
+
+    <input type="text" min="0" class="form-control" name="name[]" placeholder="Item 1" />
+    <input type="text" min="0" class="form-control" name="quantity[]" placeholder="Quantity" /> <br />
+    <input type="text" min="0" class="form-control" name="name[]" placeholder="Item 2" />
+    <input type="text" min="0" class="form-control" name="quantity[]" placeholder="Quantity" /> <br />
+    <input type="text" min="0" class="form-control" name="name[]" placeholder="Item 3" />
+    <input type="text" min="0" class="form-control" name="quantity" placeholder="Quantity" /> <br />
+    <input type="submit" value="ADD Request" class="form-control" />
+</form>
