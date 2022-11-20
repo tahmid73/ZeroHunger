@@ -92,7 +92,8 @@ namespace assignments.Controllers
             var req = new request();
             {
                 r_id = r.r_id,
-                r.status= "Pending"
+                r.status= "Pending",
+                preserve_time = r.preserve_time,
             };
             db.requests.Add(req);
             db.SaveChanges();
@@ -107,7 +108,63 @@ namespace assignments.Controllers
                     });
                 }
             }
+            db.SaveChanges();
             return RedirectToAction("ShowRequest");
         }
+
+        public ActionResult DeleteReq(int id)
+        {
+            var db = new NGOEntities3();
+            var i = (from req in db.foods
+                     where req.req_id == id
+                     select req).ToList();
+            foreach (var item in i)
+            {
+                db.foods.Remove(item);
+                db.SaveChanges();
+
+            }
+            var r = (from req in db.requests
+                     where req.req_id == id
+                     select req).SingleOrDefault();
+            db.requests.Remove(r);
+            db.SaveChanges();
+
+
+            return RedirectToAction("ShowRequest");
+        }
+
+
+        public ActionResult AcceptRequest(int id)
+        {
+            var db = new NGOEntities3();
+            var req = (from r in db.requests
+                       where r.req_id == id
+                       select r).SingleOrDefault();
+            req.status = "Accepted";
+            db.SaveChanges();
+            return RedirectToAction("ShowEmployee");
+        }
+        public ActionResult cancleRequest(int id)
+        {
+            var db = new NGOEntities3();
+            var req = (from r in db.requests
+                       where r.req_id == id
+                       select r).SingleOrDefault();
+            req.status = "Rejected";
+            db.SaveChanges();
+            return RedirectToAction("ShowEmployee");
+        }
+        public ActionResult CompleteRequest(int id)
+        {
+            var db = new NGOEntities3();
+            var req = (from r in db.requests
+                       where r.req_id == id
+                       select r).SingleOrDefault();
+            req.status = "Completed";
+            db.SaveChanges();
+            return RedirectToAction("ShowEmployee");
+        }
+
     }
 }
