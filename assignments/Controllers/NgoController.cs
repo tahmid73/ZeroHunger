@@ -134,6 +134,21 @@ namespace assignments.Controllers
             return RedirectToAction("ShowRequest");
         }
 
+        [HttpGet]
+        public ActionResult CheckRequest(int id)
+        {
+            var db = new NGOEntities3();
+            var name = (from n in db.employees
+                        where n.e_id == id
+                        select n).SingleOrDefault();
+            ViewBag.id = id;
+            ViewBag.name = name.e_name;
+            var req = (from r in db.requests
+                       where r.req_id == id
+                       select r).ToList();
+
+            return View(req);
+        }
 
         public ActionResult AcceptRequest(int id)
         {
