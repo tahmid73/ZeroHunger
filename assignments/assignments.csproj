@@ -220,6 +220,8 @@
     <Content Include="Views\Ngo\AddRestaurant.cshtml" />
     <Content Include="Views\Ngo\AddEmployee.cshtml" />
     <Content Include="Views\Ngo\AddRequest.cshtml" />
+    <Content Include="Views\Ngo\AssignEmployee.cshtml" />
+    <Content Include="Views\Ngo\ShowRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

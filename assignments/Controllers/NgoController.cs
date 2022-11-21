@@ -89,10 +89,10 @@ namespace assignments.Controllers
         public ActionResult AddRequest(request r, string[]name, int[]quantity)
         {
             var db = new NGOEntities3();
-            var req = new request();
+            var req = new request()
             {
                 r_id = r.r_id,
-                r.status= "Pending",
+                status= "Pending",
                 preserve_time = r.preserve_time,
             };
             db.requests.Add(req);
@@ -148,6 +148,29 @@ namespace assignments.Controllers
                        select r).ToList();
 
             return View(req);
+        }
+
+        [HttpGet]
+        public ActionResult AssignEmployee(int id)
+        {
+            var db = new NGOEntities3();
+            var req = (from r in db.requests
+                       where r.req_id == id
+                       select r).SingleOrDefault();
+            ViewBag.employees = db.employees.ToList();
+            return View(req);
+        }
+        [HttpPost]
+        public ActionResult AssignEmployee(request request )
+        {
+            var db = new NGOEntities3();
+            var req = (from r in db.requests
+                       where r.req_id == request.req_id
+                       select r).SingleOrDefault();
+            req.collected_by = request.collected_by;
+            req.status = "Accepted";
+            db.SaveChanges();
+            return RedirectToAction("ShowRequest");
         }
 
         public ActionResult AcceptRequest(int id)
